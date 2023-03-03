@@ -11,7 +11,8 @@ namespace ActivHilos
         static void Main(string[] args)
         {
             Hilos hilos = new Hilos();
-
+            while(hilos.terminado < 2) { }
+            Console.Write("Finalizo el programa");
             Console.ReadKey();
         }
     }

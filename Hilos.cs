@@ -10,33 +10,42 @@ namespace ActivHilos
     internal class Hilos
     {
         int a, i;
+        public int terminado = 0;
         public Hilos()
         {
-            Thread t = new Thread(Imprime);
+            Thread t = new Thread(Productor);
 
             t.Start();
 
-            Thread t1 = new Thread(Imprime1);
+            Thread t1 = new Thread(Consumidor);
 
             t1.Start();
         }
 
 
 
-        public void Imprime()
+        bool puedeImprimir = false;
+        void Productor()
         {
-            for (int i = 0; i < 5; i++)
+            for(i = 0; i < 10; i++) 
             {
-                Console.WriteLine(i + "Hilo 1");
+                puedeImprimir = true;
+                while(puedeImprimir == true){ }
             }
+            terminado++;
         }
 
-        public void Imprime1()
+        void Consumidor()
         {
-            for (int i = 0; i < 5; i++)
+            while(i<10)
             {
-                Console.WriteLine(i + "Hilo 2");
+                if(puedeImprimir == true)
+                {
+                    Console.WriteLine(i);
+                    puedeImprimir = false;  
+                }
             }
+            terminado++;
         }
     }
 }
